@@ -1,128 +1,98 @@
-# Windows DoH Installer
+# DoH Windows Installer
 
-One-click Windows EXE installer that automatically installs DNS-over-HTTPS (DoH) registry configurations and generates a setup guide PDF. No PowerShell scripts, no user interaction required during installation.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Platform](https://img.shields.io/badge/Platform-Windows%2010%2B-0078d4)](https://microsoft.com)
+[![Built with](https://img.shields.io/badge/Built%20with-C%23%20%2F%20.NET%208-512BD4)](https://dotnet.microsoft.com)
+[![Size](https://img.shields.io/badge/Size-78%20MB-green)](releases)
 
-## Features
+**Your favorite DNS. Automated. Encrypted.**
 
-✅ **One-Click Installation** - Just run the EXE  
-✅ **Silent Registry Import** - Installs all DoH providers automatically  
-✅ **PDF Guide Generation** - Creates setup instructions on Desktop  
-✅ **Automatic Reboot** - System reboots with 30-second countdown  
-✅ **8 DNS Providers Included** - Cloudflare, Quad9, OpenDNS, Google, NextDNS, Control D, Mullvad, Comodo  
-✅ **No Dependencies** - No PowerShell, npm, or Node.js required  
-✅ **Admin-Only Install** - Requires administrator privileges  
-
-## Installation
-
-### For Users
-
-1. Download **DoH-Installer.exe** from [Releases](https://github.com/1LUC1D4710N/doh-windows-installer/releases)
-2. Run `DoH-Installer.exe`
-3. Click **Install**
-4. Wait for registry imports to complete
-5. Review the PDF generated on your Desktop
-6. System reboots automatically in 30 seconds
-7. After reboot, follow the PDF instructions to configure your DNS provider
-
-### Configuration After Installation
-
-1. Open **Settings** (Win+I)
-2. Go to **Network & Internet** → **DNS Settings**
-3. Enable **DNS over HTTPS (DoH)**
-4. Select your preferred DNS provider:
-   - **Cloudflare** (1.1.1.1) - Privacy-focused
-   - **Quad9** (9.9.9.9) - Security & threat protection
-   - **OpenDNS** (208.67.222.222) - Content filtering
-   - **Google DNS** (8.8.8.8) - Fast & reliable
-   - **NextDNS** (45.90.28.0) - Privacy & security
-   - **Control D** (76.76.19.19) - Customizable filtering
-   - **Mullvad** (194.242.2.2) - Privacy & ad-blocking
-   - **Comodo** (8.26.56.26) - Threat protection
-
-5. Enable **Auto-template** setting (when available)
-6. Click **Save**
-
-## Building from Source
-
-### Requirements
-
-- **Inno Setup 6.x** (free) - Download from [jrsoftware.org](https://jrsoftware.org/isdl.php)
-- Windows 10/11
-- Administrator privileges
-
-### Steps
-
-1. Install **Inno Setup**
-2. Open `DoH-Installer.iss` in Inno Setup IDE
-3. Click **Build → Compile** (Ctrl+F9)
-4. Output: `DoH-Installer.exe` is generated in the project directory
-5. Test the installer on a Windows VM before releasing
-
-## File Structure
-
-```
-doh-windows-installer/
-├── DoH-Installer.iss                          # Inno Setup script
-├── Doh-Well-Known-Servers.reg                 # DoH registry configurations
-├── Global-InterfaceSpecificParameter.reg      # Global DNS settings
-├── DNS-PROVIDERS-REFERENCE.md                 # Provider documentation
-├── README.md                                  # This file
-└── LICENSE                                    # MIT License
-```
-
-## What Gets Installed
-
-- **DoH Well-Known Servers Registry** - Adds 8 DNS providers with DoH support
-- **Global Interface Parameters** - Configures system-wide DNS settings
-- **Desktop PDF Guide** - Setup instructions and provider list
-
-## Technical Details
-
-### How It Works
-
-1. **Pre-Installation**: Extracts registry files to temporary directory
-2. **Installation Phase**:
-   - Imports `Doh-Well-Known-Servers.reg` silently
-   - Imports `Global-InterfaceSpecificParameter.reg` silently
-   - Generates professional HTML/PDF guide
-   - Saves PDF to Desktop
-3. **Post-Installation**:
-   - Schedules system reboot in 30 seconds
-   - Shows completion message
-
-### Registry Locations Modified
-
-- `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters\DohWellKnownServers`
-- `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters`
-
-### Uninstallation
-
-Use Windows **Settings** → **Apps** → **Installed apps** → find **Windows DoH Installer** → **Uninstall**
-
-Uninstaller restores registry to pre-installation state.
-
-## Requirements
-
-- **Windows 10 21H1+** or **Windows 11**
-- **Administrator privileges** (required for registry modification)
-- **System reboot** (automatic)
-
-## Notes
-
-- Installation requires administrator rights
-- System will reboot automatically after installation completes
-- Back up system before installation (optional but recommended)
-- Registry changes take effect immediately after reboot
-
-## License
-
-MIT License - See [LICENSE](LICENSE) file for details
-
-## Support
-
-For issues or questions, see [DNS-PROVIDERS-REFERENCE.md](DNS-PROVIDERS-REFERENCE.md) for detailed provider information.
+Install 223+ DNS servers into Windows. Then configure them in Settings. That's it.
 
 ---
 
-**Created by**: [@1LUC1D4710N](https://github.com/1LUC1D4710N)  
-**Repository**: [windows-doh-registry](https://github.com/1LUC1D4710N/windows-doh-registry)
+## What It Does
+
+**Installs 223+ DNS Servers**  
+Cloudflare, Google, Quad9, OpenDNS, Mullvad, AdGuard, and more. Ready to use.
+
+**Creates Restore Point**  
+System restore point created before any changes. Rollback anytime if needed.
+
+**Backs Up Registry**  
+Full backup saved to Documents. Use it to restore if you change your mind.
+
+**Logs Everything**  
+Every action recorded. You'll know exactly what changed and when.
+
+**Verifies Installation**  
+Confirms all servers installed correctly before completion.
+
+**One Reboot**  
+Changes take effect after reboot. Then you're done.
+
+---
+
+## How It Works
+
+**1. Download & Run**  
+Download `doh-windows-installer.exe`. Right-click → Run as Administrator.
+
+**2. Watch It Install**  
+223+ DNS servers installed into Windows registry. Completes in 30-60 seconds.
+
+**3. Reboot**  
+Restart your PC. Changes take effect.
+
+**4. Configure in Settings**  
+Open Settings → Network & Internet → DNS Settings. Choose your favorite provider. Windows auto-templates the DoH for you.
+
+---
+
+## After Installation
+
+Once rebooted, configure DoH in Windows Settings (takes 2 minutes):
+
+1. Open Settings (Win+I)
+2. Go to Network & Internet → Advanced network settings → DNS Settings
+3. Click Edit next to DNS servers
+4. Select Manual
+5. Type your preferred DNS provider's IPv4 and IPv6 addresses
+6. Windows auto-templates the DoH endpoint for you
+7. Click Save
+
+That's it. Your DNS is now encrypted.
+
+---
+
+## Supported Providers
+
+**Cloudflare** — 1.1.1.1 • 1.0.0.1 (12 configurations)
+
+**Google** — 8.8.8.8 • 8.8.4.4 (6 configurations)
+
+**Quad9** — 9.9.9.9 • 149.112.112.112 (13 configurations)
+
+**OpenDNS** — 208.67.222.222 • 208.67.220.220 (12 configurations)
+
+**Mullvad** — 194.242.2.2 • Adblock variants (10 configurations)
+
+**AdGuard** — 94.140.14.14 • Family filtering (12 configurations)
+
+**Control D** — 76.76.2.0 • Multiple options (26 configurations)
+
+**Joindns** — 86.54.11.1 • Child protection (16 configurations)
+
+**Clean Browsing** — 185.228.168.168 • Content filtering (12 configurations)
+
+**LibreDNS** — 116.202.176.26 • Ad-blocking (2 configurations)
+
+**Uncensored DNS** — 91.239.100.100 • Privacy (4 configurations)
+
+All providers: IPv4 and IPv6 endpoints included
+
+---
+
+## License
+
+MIT License – No email. No tracking. No accounts.

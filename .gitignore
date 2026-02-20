@@ -3,7 +3,9 @@ Output/
 *.exe
 *.dll
 
-# Build artifacts
+# .NET Build artifacts
+bin/
+obj/
 *.bak
 *.tmp
 *.log

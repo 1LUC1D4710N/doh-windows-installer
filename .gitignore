@@ -1,0 +1,35 @@
+# Inno Setup Build Output
+Output/
+*.exe
+*.dll
+
+# Build artifacts
+*.bak
+*.tmp
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.user
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Node (although not used, good practice)
+node_modules/
+npm-debug.log
+package-lock.json
+
+# Temporary files
+*.temp
+*.cache

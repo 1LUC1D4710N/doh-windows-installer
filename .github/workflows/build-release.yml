@@ -23,10 +23,18 @@ jobs:
       run: dotnet restore
 
     - name: Build Release
-      run: dotnet build -c Release --no-restore
+      run: dotnet build doh-windows-installer.csproj -c Release --no-restore
 
     - name: Publish standalone EXE
-      run: dotnet publish -c Release -o publish
+      run: dotnet publish doh-windows-installer.csproj -c Release -o publish
+
+    - name: Verify EXE exists
+      run: |
+        if (-Not (Test-Path "publish\doh-windows-installer.exe")) {
+          Write-Error "EXE not found at publish\doh-windows-installer.exe"
+          exit 1
+        }
+      shell: pwsh
 
     - name: Upload EXE artifact
       uses: actions/upload-artifact@v4
@@ -36,8 +44,11 @@ jobs:
 
     - name: Create Release
       if: startsWith(github.ref, 'refs/tags/v')
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         files: publish/doh-windows-installer.exe
+        draft: false
+        prerelease: false
+        generate_release_notes: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

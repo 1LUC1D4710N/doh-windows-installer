@@ -6,9 +6,12 @@ Output/
 # .NET Build artifacts
 bin/
 obj/
+publish/
+publish-*/
 *.bak
 *.tmp
 *.log
+.vs/
 
 # IDE
 .vscode/

@@ -85,6 +85,8 @@ That's it. Your DNS is now encrypted.
 
 All providers: IPv4 and IPv6 endpoints included
 
+**→ [See complete DNS providers reference](DNS-PROVIDERS-REFERENCE.md) for all 223+ server configurations and details**
+
 ---
 
 ## License

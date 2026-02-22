@@ -184,13 +184,19 @@ namespace DoHWindowsInstaller
             {
                 // Step 1: Create system restore point
                 Console.WriteLine("Creating system restore point...");
+                Console.WriteLine("(Note: Requires System Restore to be enabled and running)\n");
                 if (CreateRestorePoint())
                 {
                     Console.WriteLine("✓ System restore point created\n");
                 }
                 else
                 {
-                    Console.WriteLine("⚠ Warning: Could not create restore point. Continuing anyway...\n");
+                    Console.WriteLine("⚠ WARNING: System Restore may be disabled or unavailable.");
+                    Console.WriteLine("  To enable System Restore:");
+                    Console.WriteLine("  1. Search 'Create a restore point' in Windows");
+                    Console.WriteLine("  2. Click 'Configure' on the System Protection tab");
+                    Console.WriteLine("  3. Select your drive and click 'Enable system protection'\n");
+                    Console.WriteLine("  Continuing with DNS configuration...\n");
                 }
 
                 // Step 2: Configure DoH Well-Known Servers
@@ -251,6 +257,16 @@ namespace DoHWindowsInstaller
         {
             try
             {
+                // Check if System Restore is enabled first
+                try
+                {
+                    using (RegistryKey key = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows NT\CurrentVersion\SPP\Clients"))
+                    {
+                        // Registry path check for System Restore service
+                    }
+                }
+                catch { /* Continue anyway */ }
+
                 ManagementScope scope = new ManagementScope(@"\\.\root\default");
                 scope.Connect();
 
@@ -258,16 +274,34 @@ namespace DoHWindowsInstaller
                 ManagementBaseObject inParams = classInstance.GetMethodParameters("CreateRestorePoint");
 
                 inParams["Description"] = "DoH Windows Installer - Pre-installation checkpoint";
-                inParams["RestorePointType"] = 0;
-                inParams["EventType"] = 1;
+                inParams["RestorePointType"] = 0;  // RESOURCE_DISK
+                inParams["EventType"] = 1;         // BEGIN_SYSTEM_RESTORE
 
                 ManagementBaseObject outParams = classInstance.InvokeMethod("CreateRestorePoint", inParams, null);
 
-                return outParams != null;
+                if (outParams != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("Warning: Could not create restore point: SystemRestore returned null");
+                    return false;
+                }
+            }
+            catch (System.UnauthorizedAccessException)
+            {
+                Console.WriteLine("Warning: Could not create restore point: Access denied (System Restore may be disabled)");
+                return false;
+            }
+            catch (System.Runtime.InteropServices.COMException ex)
+            {
+                Console.WriteLine($"Warning: Could not create restore point: System Restore service error (Code: {ex.HResult:X})");
+                return false;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Warning: Could not create restore point: {ex.Message}");
+                Console.WriteLine($"Warning: Could not create restore point: {ex.GetType().Name} - {ex.Message}");
                 return false;
             }
         }

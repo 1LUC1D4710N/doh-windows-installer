@@ -28,6 +28,7 @@ Changes take effect after reboot. Then you're done.
 
 **1. Create a Restore Point**  
 Before installing, manually create a system restore point for safety:
+
 - Search "Create a restore point" in Windows
 - Click "Create" to save a checkpoint
 - This allows you to easily undo these DNS changes if needed

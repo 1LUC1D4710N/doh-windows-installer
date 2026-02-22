@@ -13,17 +13,11 @@ Install 223+ DNS servers into Windows. Then configure them in Settings. That's i
 
 ## What It Does
 
+**Creates Restore Point**  
+System restore point created silently before installation. Rollback anytime via System Restore if needed.
+
 **Installs 223+ DNS Servers**  
 Cloudflare, Google, Quad9, OpenDNS, Mullvad, AdGuard, and more. Ready to use.
-
-**Creates Restore Point**  
-System restore point created before any changes. Rollback anytime if needed.
-
-**Backs Up Registry**  
-Full backup saved to Documents. Use it to restore if you change your mind.
-
-**Logs Everything**  
-Every action recorded. You'll know exactly what changed and when.
 
 **Verifies Installation**  
 Confirms all servers installed correctly before completion.
@@ -38,11 +32,11 @@ Changes take effect after reboot. Then you're done.
 **1. Download & Run**  
 Download `doh-windows-installer.exe`. Right-click → Run as Administrator.
 
-**2. Watch It Install**  
-223+ DNS servers installed into Windows registry. Completes in 30-60 seconds.
+**2. Trust the Process**  
+Creates a system restore point, installs 223+ DNS servers, verifies setup. Completes in seconds.
 
 **3. Reboot**  
-Restart your PC. Changes take effect.
+Restart your PC when prompted. Changes take effect.
 
 **4. Configure in Settings**  
 Open Settings → Network & Internet → DNS Settings. Choose your favorite provider. Windows auto-templates the DoH for you.

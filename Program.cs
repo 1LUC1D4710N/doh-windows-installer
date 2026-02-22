@@ -9,8 +9,6 @@ namespace DoHWindowsInstaller
 {
     class Program
     {
-        private static readonly string LogFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DoH_Install.log");
-        private static bool restorePointCreated = false;
 
         // Embedded DoH Well-Known Servers Database - All DNS servers configured
         private static readonly Dictionary<string, string> DohServers = new Dictionary<string, string>
@@ -180,7 +178,6 @@ namespace DoHWindowsInstaller
                 return;
             }
 
-            Log("DoH Installer started by user " + Environment.UserName);
             Console.WriteLine("✓ Running as Administrator\n");
 
             try
@@ -190,29 +187,23 @@ namespace DoHWindowsInstaller
                 if (CreateRestorePoint())
                 {
                     Console.WriteLine("✓ System restore point created\n");
-                    restorePointCreated = true;
                 }
                 else
                 {
                     Console.WriteLine("⚠ Warning: Could not create restore point. Continuing anyway...\n");
                 }
 
-                // Step 2: Backup registry
-                Console.WriteLine("Backing up registry...");
-                BackupRegistry();
-                Console.WriteLine("✓ Registry backed up\n");
-
-                // Step 3: Configure DoH Well-Known Servers
+                // Step 2: Configure DoH Well-Known Servers
                 Console.WriteLine($"Configuring {DohServers.Count} DoH servers...");
                 ConfigureDohWellKnownServers();
                 Console.WriteLine("✓ DoH Well-Known Servers configured\n");
 
-                // Step 4: Configure Interface Specific Parameters
+                // Step 3: Configure Interface Specific Parameters
                 Console.WriteLine("Configuring Global Interface Parameters...");
                 ConfigureInterfaceSpecificParameters();
                 Console.WriteLine("✓ Interface Parameters configured\n");
 
-                // Step 5: Verify changes
+                // Step 4: Verify changes
                 Console.WriteLine("Verifying changes...");
                 VerifyConfiguration();
                 Console.WriteLine("✓ Configuration verified\n");
@@ -221,8 +212,6 @@ namespace DoHWindowsInstaller
                 Console.WriteLine($"✓ Installation completed successfully!");
                 Console.WriteLine($"✓ {DohServers.Count} DNS servers configured");
                 Console.WriteLine("═══════════════════════════════════════\n");
-
-                Log("Installation completed successfully");
 
                 // Prompt for reboot
                 Console.WriteLine("Your system needs to reboot for changes to take effect.");
@@ -237,7 +226,6 @@ namespace DoHWindowsInstaller
             catch (Exception ex)
             {
                 Console.WriteLine($"\n✗ ERROR: {ex.Message}");
-                Log($"ERROR: {ex.Message}\n{ex.StackTrace}");
                 OfferRollback();
             }
 
@@ -275,49 +263,12 @@ namespace DoHWindowsInstaller
 
                 ManagementBaseObject outParams = classInstance.InvokeMethod("CreateRestorePoint", inParams, null);
 
-                if (outParams != null)
-                {
-                    Log("System restore point created successfully");
-                    return true;
-                }
+                return outParams != null;
             }
             catch (Exception ex)
             {
-                Log($"Warning: Could not create restore point: {ex.Message}");
-            }
-
-            return false;
-        }
-
-        static void BackupRegistry()
-        {
-            try
-            {
-                string backupDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DoH_Backup");
-                Directory.CreateDirectory(backupDir);
-
-                string timestamp = DateTime.Now.ToString("yyyy-MM-dd_HHmmss");
-                string backupFile = Path.Combine(backupDir, $"DnsCache_Backup_{timestamp}.reg");
-
-                ProcessStartInfo psi = new ProcessStartInfo
-                {
-                    FileName = "reg",
-                    Arguments = $"export \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Dnscache\" \"{backupFile}\" /y",
-                    RedirectStandardOutput = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                };
-
-                using (Process process = Process.Start(psi))
-                {
-                    process?.WaitForExit();
-                }
-
-                Log($"Registry backed up to: {backupFile}");
-            }
-            catch (Exception ex)
-            {
-                Log($"Warning: Could not backup registry: {ex.Message}");
+                Console.WriteLine($"Warning: Could not create restore point: {ex.Message}");
+                return false;
             }
         }
 
@@ -329,16 +280,13 @@ namespace DoHWindowsInstaller
 
                 using (RegistryKey baseKey = Registry.LocalMachine.CreateSubKey(registryPath))
                 {
-                    int count = 0;
                     foreach (var server in DohServers)
                     {
                         using (RegistryKey ipKey = baseKey.CreateSubKey(server.Key))
                         {
                             ipKey.SetValue("Template", server.Value, RegistryValueKind.String);
-                            count++;
                         }
                     }
-                    Log($"Configured {count} DoH Well-Known servers");
                 }
             }
             catch (Exception ex)
@@ -355,17 +303,14 @@ namespace DoHWindowsInstaller
 
                 using (RegistryKey baseKey = Registry.LocalMachine.CreateSubKey(registryPath))
                 {
-                    int count = 0;
                     foreach (var server in DohServers)
                     {
                         using (RegistryKey ipKey = baseKey.CreateSubKey(server.Key))
                         {
                             ipKey.SetValue("DohTemplate", server.Value, RegistryValueKind.String);
                             ipKey.SetValue("DohFlags", new byte[] { 0x11, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }, RegistryValueKind.Binary);
-                            count++;
                         }
                     }
-                    Log($"Configured {count} InterfaceSpecific parameters");
                 }
             }
             catch (Exception ex)
@@ -380,38 +325,29 @@ namespace DoHWindowsInstaller
             {
                 using (RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\Dnscache\Parameters\DohWellKnownServers"))
                 {
-                    if (key != null)
+                    if (key != null && key.SubKeyCount == 0)
                     {
-                        int subKeyCount = key.SubKeyCount;
-                        Log($"Verification: Found {subKeyCount} DoH entries in registry");
+                        throw new Exception("No DoH servers found in registry after configuration");
                     }
                 }
             }
             catch (Exception ex)
             {
-                Log($"Warning: Could not verify configuration: {ex.Message}");
+                throw new Exception($"Configuration verification failed: {ex.Message}");
             }
         }
 
         static void OfferRollback()
         {
-            Console.WriteLine("\n⚠ An error occurred. Would you like to restore your system? (Y/N): ");
-            string input = Console.ReadLine()?.ToLower() ?? "n";
-
-            if (input == "y" || input == "yes")
-            {
-                Console.WriteLine("\nTo restore your system:");
-                Console.WriteLine("1. Open 'System Restore' (search in Windows)");
-                Console.WriteLine("2. Click 'Next' and select the restore point created today");
-                Console.WriteLine("3. Follow the prompts to restore your system\n");
-                Log("User initiated rollback process");
-            }
+            Console.WriteLine("\n⚠ An error occurred. To restore your system:");
+            Console.WriteLine("1. Open 'System Restore' (search in Windows)");
+            Console.WriteLine("2. Click 'Next' and select the restore point created today");
+            Console.WriteLine("3. Follow the prompts to restore your system\n");
         }
 
         static void PromptReboot()
         {
             Console.WriteLine("\nSystem will reboot in 30 seconds...");
-            Log("System reboot initiated");
 
             ProcessStartInfo psi = new ProcessStartInfo
             {
@@ -424,17 +360,5 @@ namespace DoHWindowsInstaller
             Process.Start(psi);
         }
 
-        static void Log(string message)
-        {
-            try
-            {
-                string logEntry = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] {message}";
-                File.AppendAllText(LogFile, logEntry + Environment.NewLine);
-            }
-            catch
-            {
-                // Silently fail if logging fails
-            }
-        }
     }
 }

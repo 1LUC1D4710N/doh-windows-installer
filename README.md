@@ -7,7 +7,7 @@
 
 **Your favorite DNS. Automated. Encrypted.**
 
-Install 223+ DNS servers into Windows. Then configure them in Settings. That's it.
+Install 125 DNS servers into Windows. Then configure them in Settings. That's it.
 
 ---
 
@@ -16,7 +16,7 @@ Install 223+ DNS servers into Windows. Then configure them in Settings. That's i
 **Creates Restore Point**  
 System restore point created silently before installation. Rollback anytime via System Restore if needed.
 
-**Installs 223+ DNS Servers**  
+**Installs 125 DNS Servers**  
 Cloudflare, Google, Quad9, OpenDNS, Mullvad, AdGuard, and more. Ready to use.
 
 **Verifies Installation**  
@@ -33,7 +33,7 @@ Changes take effect after reboot. Then you're done.
 Download `doh-windows-installer.exe`. Right-click → Run as Administrator.
 
 **2. Trust the Process**  
-Creates a system restore point, installs 223+ DNS servers, verifies setup. Completes in seconds.
+Creates a system restore point, installs 125 DNS servers, verifies setup. Completes in seconds.
 
 **3. Reboot**  
 Restart your PC when prompted. Changes take effect.
@@ -88,7 +88,7 @@ That's it. Your DNS is now encrypted.
 
 All providers: IPv4 and IPv6 endpoints included
 
-**→ [See complete DNS providers reference](DNS-PROVIDERS-REFERENCE.md) for all 223+ server configurations and details**
+**→ [See complete DNS providers reference](DNS-PROVIDERS-REFERENCE.md) for all 125 server configurations and details**
 
 ---
 

@@ -1,6 +1,6 @@
 # DNS Providers Reference
 
-Complete list of all 223+ DNS-over-HTTPS servers configured by the DoH Windows Installer. Use this as a reference to choose your preferred provider.
+Complete list of all 125 DNS-over-HTTPS servers configured by the DoH Windows Installer. Use this as a reference to choose your preferred provider.
 
 ---
 
@@ -273,4 +273,4 @@ Complete list of all 223+ DNS-over-HTTPS servers configured by the DoH Windows I
 7. Windows will auto-fill the DoH endpoint
 8. Click Save
 
-All 223+ configurations are already installed on your system by the DoH Windows Installer.
+All 125 configurations are already installed on your system by the DoH Windows Installer.

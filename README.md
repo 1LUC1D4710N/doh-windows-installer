@@ -51,9 +51,12 @@ Once rebooted, configure DoH in Windows Settings (takes 2 minutes):
 2. Go to Network & Internet → Advanced network settings → DNS Settings
 3. Click Edit next to DNS servers
 4. Select Manual
-5. Type your preferred DNS provider's IPv4 and IPv6 addresses
-6. Windows auto-templates the DoH endpoint for you
-7. Click Save
+5. Toggle IPv4 to On
+6. Type your preferred DNS provider's IPv4 address
+7. Toggle IPv6 to On (if available)
+8. Type your preferred DNS provider's IPv6 address
+9. Under "DNS over HTTPS", select On (automatic template)
+10. Click Save
 
 That's it. Your DNS is now encrypted.
 

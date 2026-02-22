@@ -9,13 +9,12 @@
     <IncludeNativeLibrariesForSelfContain>true</IncludeNativeLibrariesForSelfContain>
     <RootNamespace>DoHWindowsInstaller</RootNamespace>
     <AssemblyName>doh-windows-installer</AssemblyName>
-    <Version>1.0.3</Version>
-    <FileVersion>1.0.3.0</FileVersion>
-    <ProductVersion>1.0.3</ProductVersion>
+    <Version>1.0.4</Version>
+    <FileVersion>1.0.4.0</FileVersion>
+    <ProductVersion>1.0.4</ProductVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Management" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

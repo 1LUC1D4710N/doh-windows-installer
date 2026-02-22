@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Management;
 using Microsoft.Win32;
 
 namespace DoHWindowsInstaller
@@ -180,36 +179,25 @@ namespace DoHWindowsInstaller
 
             Console.WriteLine("✓ Running as Administrator\n");
 
+            // Advise user to create a restore point
+            Console.WriteLine("⚠ IMPORTANT: Before proceeding, create a system restore point:");
+            Console.WriteLine("  1. Search 'Create a restore point' in Windows");
+            Console.WriteLine("  2. Click 'Create' to save a checkpoint");
+            Console.WriteLine("  3. This allows you to easily undo these DNS changes if needed\n");
+
             try
             {
-                // Step 1: Create system restore point
-                Console.WriteLine("Creating system restore point...");
-                Console.WriteLine("(Note: Requires System Restore to be enabled and running)\n");
-                if (CreateRestorePoint())
-                {
-                    Console.WriteLine("✓ System restore point created\n");
-                }
-                else
-                {
-                    Console.WriteLine("⚠ WARNING: System Restore may be disabled or unavailable.");
-                    Console.WriteLine("  To enable System Restore:");
-                    Console.WriteLine("  1. Search 'Create a restore point' in Windows");
-                    Console.WriteLine("  2. Click 'Configure' on the System Protection tab");
-                    Console.WriteLine("  3. Select your drive and click 'Enable system protection'\n");
-                    Console.WriteLine("  Continuing with DNS configuration...\n");
-                }
-
-                // Step 2: Configure DoH Well-Known Servers
+                // Step 1: Configure DoH Well-Known Servers
                 Console.WriteLine($"Configuring {DohServers.Count} DoH servers...");
                 ConfigureDohWellKnownServers();
                 Console.WriteLine("✓ DoH Well-Known Servers configured\n");
 
-                // Step 3: Configure Interface Specific Parameters
+                // Step 2: Configure Interface Specific Parameters
                 Console.WriteLine("Configuring Global Interface Parameters...");
                 ConfigureInterfaceSpecificParameters();
                 Console.WriteLine("✓ Interface Parameters configured\n");
 
-                // Step 4: Verify changes
+                // Step 3: Verify changes
                 Console.WriteLine("Verifying changes...");
                 VerifyConfiguration();
                 Console.WriteLine("✓ Configuration verified\n");
@@ -249,59 +237,6 @@ namespace DoHWindowsInstaller
             }
             catch
             {
-                return false;
-            }
-        }
-
-        static bool CreateRestorePoint()
-        {
-            try
-            {
-                // Check if System Restore is enabled first
-                try
-                {
-                    using (RegistryKey key = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows NT\CurrentVersion\SPP\Clients"))
-                    {
-                        // Registry path check for System Restore service
-                    }
-                }
-                catch { /* Continue anyway */ }
-
-                ManagementScope scope = new ManagementScope(@"\\.\root\default");
-                scope.Connect();
-
-                ManagementClass classInstance = new ManagementClass(scope, new ManagementPath("SystemRestore"), null);
-                ManagementBaseObject inParams = classInstance.GetMethodParameters("CreateRestorePoint");
-
-                inParams["Description"] = "DoH Windows Installer - Pre-installation checkpoint";
-                inParams["RestorePointType"] = 0;  // RESOURCE_DISK
-                inParams["EventType"] = 1;         // BEGIN_SYSTEM_RESTORE
-
-                ManagementBaseObject outParams = classInstance.InvokeMethod("CreateRestorePoint", inParams, null);
-
-                if (outParams != null)
-                {
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine("Warning: Could not create restore point: SystemRestore returned null");
-                    return false;
-                }
-            }
-            catch (System.UnauthorizedAccessException)
-            {
-                Console.WriteLine("Warning: Could not create restore point: Access denied (System Restore may be disabled)");
-                return false;
-            }
-            catch (System.Runtime.InteropServices.COMException ex)
-            {
-                Console.WriteLine($"Warning: Could not create restore point: System Restore service error (Code: {ex.HResult:X})");
-                return false;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Warning: Could not create restore point: {ex.GetType().Name} - {ex.Message}");
                 return false;
             }
         }

@@ -66,7 +66,7 @@ Complete list of all 223+ DNS-over-HTTPS servers configured by the DoH Windows I
 
 ---
 
-## Joindns (16 configurations)
+## DNS4EU (Joindns) (16 configurations)
 
 **Protective Filtering**
 - IPv4: `86.54.11.1` → https://protective.joindns4.eu/dns-query
@@ -250,7 +250,7 @@ Complete list of all 223+ DNS-over-HTTPS servers configured by the DoH Windows I
 |----------|------|------|------|----------|
 | Cloudflare | Tiered | 1.1.1.1 | 2606:4700:4700::1111 | Speed + Reliability |
 | Control D | Multi-filter | 76.76.2.x | 2606:1a40::x | Granular Control |
-| Joindns | Multi-filter | 86.54.11.x | 2a13:1001::... | European Privacy |
+| DNS4EU | Multi-filter | 86.54.11.x | 2a13:1001::... | European Privacy |
 | Quad9 | Malware/Phishing | 9.9.9.9 | 2620:fe::9 | Non-profit Security |
 | Google | Standard | 8.8.8.8 | 2001:4860:4860::8888 | Performance |
 | Mullvad | Privacy-first | 194.242.2.2 | 2a07:e340::2 | Privacy + Adblock |

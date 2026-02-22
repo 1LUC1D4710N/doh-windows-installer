@@ -75,7 +75,7 @@ That's it. Your DNS is now encrypted.
 
 **Control D** — 76.76.2.0 • Multiple options (26 configurations)
 
-**Joindns** — 86.54.11.1 • Child protection (16 configurations)
+**DNS4EU** — 86.54.11.1 • Child protection (16 configurations)
 
 **Clean Browsing** — 185.228.168.168 • Content filtering (12 configurations)
 

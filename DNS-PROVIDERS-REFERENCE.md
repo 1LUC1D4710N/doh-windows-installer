@@ -26,7 +26,7 @@ Complete list of all 223+ DNS-over-HTTPS servers configured by the DoH Windows I
 
 ---
 
-## Control D / FreeDNS (26 configurations)
+## Control D (26 configurations)
 
 **Malware & Phishing (p0)**
 - IPv4: `76.76.2.0` → https://freedns.controld.com/p0

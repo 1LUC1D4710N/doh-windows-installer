@@ -66,7 +66,7 @@ Complete list of all 223+ DNS-over-HTTPS servers configured by the DoH Windows I
 
 ---
 
-## DNS4EU (Joindns) (16 configurations)
+## DNS4EU (16 configurations)
 
 **Protective Filtering**
 - IPv4: `86.54.11.1` → https://protective.joindns4.eu/dns-query

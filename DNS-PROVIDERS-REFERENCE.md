@@ -3,7 +3,6 @@
 Complete list of all 114 DNS-over-HTTPS servers configured by the DoH Windows Installer. Use this as a reference to choose your preferred provider.
 
 ---
----
 
       DNS0.eu has been discontinued on October 17th, 2025. 
       For secure DNS-over-HTTPS, use alternatives like DNS4EU or NextDNS.io.

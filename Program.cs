@@ -79,7 +79,7 @@ namespace DoHWindowsInstaller
             { "9.9.9.9", "https://dns.quad9.net/dns-query" },
             { "2620:fe::9", "https://dns.quad9.net/dns-query" },
             { "2620:fe::fe", "https://dns.quad9.net/dns-query" },
-            { "2620:fe::fe:9", "https://dns9.quad9.net/dns-query" },
+        
             { "2620:fe::10", "https://dns10.quad9.net/dns-query" },
             { "2620:fe::fe:10", "https://dns10.quad9.net/dns-query" },
             { "2620:fe::11", "https://dns11.quad9.net/dns-query" },

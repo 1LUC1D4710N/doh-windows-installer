@@ -14,7 +14,7 @@ Install 114 DNS servers into Windows. Then configure them in Settings. That's it
 ## What It Does
 
 **Installs 114 DNS Servers**  
-Cloudflare, Google, Quad9, OpenDNS, Mullvad, AdGuard, and more. Ready to use.
+Cloudflare, Google, Quad9, OpenDNS, AdGuard, and more. Ready to use.
 
 **Verifies Installation**  
 Confirms all servers installed correctly before completion.

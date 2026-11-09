@@ -7,13 +7,13 @@
 
 **Your favorite DNS. Automated. Encrypted.**
 
-Install 125 DNS servers into Windows. Then configure them in Settings. That's it.
+Install 114 DNS servers into Windows. Then configure them in Settings. That's it.
 
 ---
 
 ## What It Does
 
-**Installs 125 DNS Servers**  
+**Installs 114 DNS Servers**  
 Cloudflare, Google, Quad9, OpenDNS, Mullvad, AdGuard, and more. Ready to use.
 
 **Verifies Installation**  
@@ -75,8 +75,6 @@ That's it. Your DNS is now encrypted.
 **Quad9** — 9.9.9.9 • 149.112.112.112 (13 configurations)
 
 **OpenDNS** — 208.67.222.222 • 208.67.220.220 (12 configurations)
-
-**Mullvad** — 194.242.2.2 • Adblock variants (10 configurations)
 
 **AdGuard** — 94.140.14.14 • Family filtering (12 configurations)
 

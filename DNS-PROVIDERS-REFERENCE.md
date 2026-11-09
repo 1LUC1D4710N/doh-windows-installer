@@ -26,7 +26,7 @@ Complete list of all 114 DNS-over-HTTPS servers configured by the DoH Windows In
 
 ---
 
-## Control D (26 configurations)
+## Control D (24 configurations)
 
 **Malware & Phishing (p0)**
 - IPv4: `76.76.2.0` → https://freedns.controld.com/p0
@@ -94,7 +94,7 @@ Complete list of all 114 DNS-over-HTTPS servers configured by the DoH Windows In
 
 ---
 
-## Quad9 (12 configurations)
+## Quad9 (14 configurations)
 
 **Standard (Malware & Phishing)**
 - IPv4: `9.9.9.9` → https://dns.quad9.net/dns-query
@@ -104,15 +104,21 @@ Complete list of all 114 DNS-over-HTTPS servers configured by the DoH Windows In
 
 **Malware + DNSSEC**
 - IPv4: `9.9.9.10` → https://dns10.quad9.net/dns-query
-- IPv4: `149.112.112.9` → https://dns9.quad9.net/dns-query
+- IPv4: `149.112.112.10` → https://dns10.quad9.net/dns-query
 - IPv6: `2620:fe::10` → https://dns10.quad9.net/dns-query
 - IPv6: `2620:fe::fe:10` → https://dns10.quad9.net/dns-query
 
-**ECS Disabled**
+**ECS Enabled (privacy advisory)**
 - IPv4: `9.9.9.11` → https://dns11.quad9.net/dns-query
 - IPv4: `149.112.112.11` → https://dns11.quad9.net/dns-query
 - IPv6: `2620:fe::11` → https://dns11.quad9.net/dns-query
 - IPv6: `2620:fe::fe:11` → https://dns11.quad9.net/dns-query
+
+**Additional DNS9 endpoints (optional)**
+- IPv4: `149.112.112.9` → https://dns9.quad9.net/dns-query
+- IPv6: `2620:fe::fe:9` → https://dns9.quad9.net/dns-query
+
+ECS (EDNS Client Subnet) can send a truncated client subnet to authoritative DNS infrastructure to improve geolocation. This may reveal an approximate location. Use the standard or Malware + DNSSEC profile if ECS is not appropriate for your privacy needs.
 
 ---
 
@@ -127,10 +133,6 @@ Complete list of all 114 DNS-over-HTTPS servers configured by the DoH Windows In
 **IPv6-only variant (DNS64)**
 - IPv6: `2001:4860:4860::64` → https://dns64.dns.google/dns-query
 - IPv6: `2001:4860:4860::6464` → https://dns64.dns.google/dns-query
-
----
-
-# Mullvad DNS (discontinued since November 2, 2026 - advisory to use alternatives)
 
 ---
 

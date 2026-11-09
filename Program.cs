@@ -71,17 +71,25 @@ namespace DoHWindowsInstaller
             { "2a13:1001::86:54:11:211", "https://child-noads.joindns4.eu/dns-query" },
             
             // Quad9
-            { "149.112.112.11", "https://dns11.quad9.net/dns-query" },
+            // Standard: malware blocking and DNSSEC validation
             { "149.112.112.112", "https://dns.quad9.net/dns-query" },
-            { "149.112.112.9", "https://dns9.quad9.net/dns-query" },
-            { "9.9.9.10", "https://dns10.quad9.net/dns-query" },
-            { "9.9.9.11", "https://dns11.quad9.net/dns-query" },
             { "9.9.9.9", "https://dns.quad9.net/dns-query" },
             { "2620:fe::9", "https://dns.quad9.net/dns-query" },
             { "2620:fe::fe", "https://dns.quad9.net/dns-query" },
-        
+
+            // Unsecured: DNSSEC validation without malware blocking
+            { "149.112.112.10", "https://dns10.quad9.net/dns-query" },
+            { "9.9.9.10", "https://dns10.quad9.net/dns-query" },
             { "2620:fe::10", "https://dns10.quad9.net/dns-query" },
             { "2620:fe::fe:10", "https://dns10.quad9.net/dns-query" },
+
+            // Additional Quad9 DNS9 IPv6 endpoint; optional profile
+            { "149.112.112.9", "https://dns9.quad9.net/dns-query" },
+            { "2620:fe::fe:9", "https://dns9.quad9.net/dns-query" },
+
+            // ECS enabled: malware blocking and DNSSEC validation
+            { "149.112.112.11", "https://dns11.quad9.net/dns-query" },
+            { "9.9.9.11", "https://dns11.quad9.net/dns-query" },
             { "2620:fe::11", "https://dns11.quad9.net/dns-query" },
             { "2620:fe::fe:11", "https://dns11.quad9.net/dns-query" },
             

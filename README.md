@@ -72,13 +72,15 @@ That's it. Your DNS is now encrypted.
 
 **Google** — 8.8.8.8 • 8.8.4.4 (6 configurations)
 
-**Quad9** — 9.9.9.9 • 149.112.112.112 (13 configurations)
+**Quad9** — 9.9.9.9 • 149.112.112.112 (14 configurations)
+
+Quad9's `dns11` profile enables EDNS Client Subnet (ECS), which may share a truncated client subnet and approximate location for geolocation. The standard and Malware + DNSSEC profiles do not use that ECS profile.
 
 **OpenDNS** — 208.67.222.222 • 208.67.220.220 (12 configurations)
 
 **AdGuard** — 94.140.14.14 • Family filtering (12 configurations)
 
-**Control D** — 76.76.2.0 • Multiple options (26 configurations)
+**Control D** — 76.76.2.0 • Multiple options (24 configurations)
 
 **DNS4EU** — 86.54.11.1 • Child protection (16 configurations)
 

@@ -37,7 +37,7 @@ Before installing, manually create a system restore point for safety:
 Download `doh-windows-installer.exe`. Right-click → Run as Administrator.
 
 **3. Trust the Process**  
-Installs 125 DNS servers, verifies setup. Completes in seconds.
+Installs 114 DNS servers, verifies setup. Completes in seconds.
 
 **4. Reboot**  
 Restart your PC when prompted. Changes take effect.
@@ -90,7 +90,7 @@ That's it. Your DNS is now encrypted.
 
 All providers: IPv4 and IPv6 endpoints included
 
-**→ [See complete DNS providers reference](DNS-PROVIDERS-REFERENCE.md) for all 125 server configurations and details**
+**→ [See complete DNS providers reference](DNS-PROVIDERS-REFERENCE.md) for all 114 server configurations and details**
 
 ---
 
